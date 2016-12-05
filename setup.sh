@@ -1,31 +1,43 @@
 #!/bin/bash
 
-apt update
+sudo apt update
 
-apt -y install wget vim make libavahi-compat-libdnssd-dev build-essential
+sudo apt -y install wget vim make libavahi-compat-libdnssd-dev build-essential
 
 wget https://nodejs.org/dist/v6.9.1/node-v6.9.1-linux-armv6l.tar.xz
 
 tar -xvf node-v6.9.1-linux-armv6l.tar.xz
 
-cp -R node-v6.9.1-linux-armv6l/* /usr/local/
+sudo cp -R node-v6.9.1-linux-armv6l/* /usr/local/
 
-npm install -g --unsafe-perm homebridge hap-nodejs node-gyp
+sudo bash -c 'npm install -g --unsafe-perm homebridge hap-nodejs node-gyp
 cd /usr/local/lib/node_modules/homebridge/
 npm install --unsafe-perm bignum
 cd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns
-node-gyp BUILDTYPE=Release rebuild
+node-gyp BUILDTYPE=Release rebuild'
 
-npm install -g forever
-npm install -g forever-service
-npm install -u wiring-pi
-npm install -u homebridge-gpio-wpi
+sudo npm install -g forever
+sudo npm install -g forever-service
+sudo npm install -u wiring-pi
+sudo npm install -u homebridge-gpio-wpi
 
 mkdir /var/homebridge
-cat <<EOT >> /var/homebridge/config.json
+
+echo "Enter a name for your bridge:"
+read bridgename
+echo "Enter a pin number for first accessory:"
+read pin1
+echo "Enter a pin number for second accessory:"
+read pin2
+echo "Enter a pin number for third accessory:"
+read pin3
+echo "Enter a pin number for fourth accessory:"
+read pin4
+
+sudo bash -c 'cat <<EOF >> /var/homebridge/config.json
 {
     "bridge": {
-        "name": "Zero",
+        "name": "$bridgename",
         "username": "00:9E:0E:01:81:DD",
         "port": 51826,
         "pin": "031-45-154"
@@ -35,31 +47,31 @@ cat <<EOT >> /var/homebridge/config.json
         {
                 "accessory": "GPIO",
                 "name": "Pin1",
-                "pin": 6
+                "pin": $pin1
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin2",
-                "pin": 13
+                "pin": $pin2
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin3",
-                "pin": 19
+                "pin": $pin3
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin4",
-                "pin": 26
+                "pin": $pin4
         }
         ],
 
     "platforms": [
         ]
 }
-EOT
+EOF'
 
-cat <<EOT >> /etc/systemd/system/homebridge.service
+sudo bash -c 'cat <<EOF >> /etc/systemd/system/homebridge.service
 HOMEBRIDGE_OPTS=-U /var/homebridge
 
 [Unit]
@@ -75,4 +87,10 @@ RestartSec=10
 KillMode=process
 [Install]
 WantedBy=multi-user.target
-EOT
+EOF'
+
+sudo systemctl deamon-reload
+sudo systemctl start homebridge
+sudo systemctl enable homebridge
+
+echo "We are done here"
