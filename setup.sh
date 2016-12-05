@@ -34,6 +34,40 @@ read pin3
 echo "Enter a pin number for fourth accessory:"
 read pin4
 
+if [ -z "${bridgename}" ]; then 
+    FOO=${bridgename:=Zero}
+else 
+    FOO=${bridgename}
+fi
+
+
+if [ -z "${pin1}" ]; then 
+    FOO=${pin1:=6}
+else 
+    FOO=${pin1}
+fi
+
+
+if [ -z "${pin2}" ]; then 
+    FOO=${pin2:=13}
+else 
+    FOO=${pin2}
+fi
+
+
+if [ -z "${pin3}" ]; then 
+    FOO=${pin3:=19}
+else 
+    FOO=${pin3}
+fi
+
+
+if [ -z "${pin4}" ]; then 
+    FOO=${pin4:=26}
+else 
+    FOO=${pin4}
+fi
+
 sudo bash -c 'cat <<EOF >> /var/homebridge/config.json
 {
     "bridge": {
