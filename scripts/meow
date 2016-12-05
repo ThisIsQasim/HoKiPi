@@ -1,0 +1,2 @@
+#!/bin/bash
+ssh Qasim@10.1.1.1 "sudo shutdown -h now & exit"
