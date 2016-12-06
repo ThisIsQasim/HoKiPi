@@ -9,3 +9,7 @@ Run as normal user and make sure your user can sudo without prompting for passwo
 
 <code>git clone https://github.com/ThisIsQasim/HoKiPi
 <p>sh HoKiPi/setup.sh</code>
+
+Enter name for the device and pin numbers according to your setup. Pins should be according to BCM numbers. You can leave the entries blank to set name as Zero and pins as 6,13,19,26 which are the last four pins on the right side of the Pi headers.
+
+Make sure you are connected to same network as your Pi. From your iOS device add the accesory. Use password 031-45-154. And your good to go.
