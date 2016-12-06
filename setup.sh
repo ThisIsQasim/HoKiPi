@@ -123,17 +123,25 @@ KillMode=process
 WantedBy=multi-user.target
 EOF'
 
-sudo bash -c 'cat <<EOF >> /etc/rc.local
-gpio export $pin1 out
-gpio export $pin2 out
-gpio export $pin3 out
-gpio export $pin4 out
+sudo bash -c 'cat <<EOF >> /var/homebridge/boot.py
+#!/usr/bin/env python
+
+import RPi.GPIO as GPIO
+
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+
+channel = [$pin1,$pin2,$pin3,$pin4]
+
+GPIO.setup(channel, GPIO.OUT, initial=GPIO.HIGH)
 EOF'
 
-sudo gpio export $pin1 out
-sudo gpio export $pin2 out
-sudo gpio export $pin3 out
-sudo gpio export $pin4 out
+sudo chmod +x /var/homebridge/boot.py
+
+sudo sed -i -e '$i \python /var/homebridge/boot.py\n' /etc/rc.local
+
 
 sudo systemctl deamon-reload
 sudo systemctl start homebridge
