@@ -68,7 +68,7 @@ else
     FOO=${pin4}
 fi
 
-sudo bash -c 'cat <<EOF >> /var/homebridge/config.json
+sudo bash -c 'cat > /var/homebridge/config.json' <<EOF
 {
     "bridge": {
         "name": "$bridgename",
@@ -103,9 +103,9 @@ sudo bash -c 'cat <<EOF >> /var/homebridge/config.json
     "platforms": [
         ]
 }
-EOF'
+EOF
 
-sudo bash -c 'cat <<EOF >> /etc/systemd/system/homebridge.service
+sudo bash -c 'cat > /etc/systemd/system/homebridge.service' <<EOF
 HOMEBRIDGE_OPTS=-U /var/homebridge
 
 [Unit]
@@ -121,9 +121,9 @@ RestartSec=10
 KillMode=process
 [Install]
 WantedBy=multi-user.target
-EOF'
+EOF
 
-sudo bash -c 'cat <<EOF >> /var/homebridge/boot.py
+sudo bash -c 'cat > /var/homebridge/boot.py' <<EOF
 #!/usr/bin/env python
 
 import RPi.GPIO as GPIO
@@ -136,7 +136,7 @@ GPIO.setwarnings(False)
 channel = [$pin1,$pin2,$pin3,$pin4]
 
 GPIO.setup(channel, GPIO.OUT, initial=GPIO.HIGH)
-EOF'
+EOF
 
 sudo chmod +x /var/homebridge/boot.py
 
