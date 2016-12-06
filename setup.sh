@@ -82,21 +82,25 @@ sudo bash -c 'cat > /var/homebridge/config.json' <<EOF
                 "accessory": "GPIO",
                 "name": "Pin1",
                 "pin": $pin1
+                "inverted": "true"
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin2",
                 "pin": $pin2
+                "inverted": "true"
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin3",
                 "pin": $pin3
+                "inverted": "true"
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin4",
                 "pin": $pin4
+                "inverted": "true"
         }
         ],
 
