@@ -7,6 +7,6 @@ The scripts setup GPIO pins on a RaspberryPi to control an attached four channel
 
 Run as normal user and make sure your user can sudo without prompting for password.
 
-<code>git clone https://github.com/ThisIsQasim/HoKiPi</code>
+<code>git clone https://github.com/ThisIsQasim/HoKiPi
 <p>
-<code>sh HoKiPi/setup.sh</code>
+sh HoKiPi/setup.sh</code>
