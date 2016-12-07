@@ -118,7 +118,6 @@ After=basic.target
 [Service]
 Type=simple
 User=root
-EnvironmentFile=/etc/default/homebridge
 ExecStart=/usr/local/bin/homebridge $HOMEBRIDGE_OPTS
 Restart=on-failure
 RestartSec=10
