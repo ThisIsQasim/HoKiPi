@@ -21,7 +21,7 @@ sudo npm install -g forever-service
 sudo npm install -u wiring-pi
 sudo npm install -u homebridge-gpio-wpi
 
-mkdir /var/homebridge
+sudo mkdir /var/homebridge
 
 echo "Enter a name for your bridge:"
 read bridgename
@@ -147,7 +147,7 @@ sudo chmod +x /var/homebridge/boot.py
 sudo sed -i -e '$i \python /var/homebridge/boot.py\n' /etc/rc.local
 
 
-sudo systemctl deamon-reload
+sudo systemctl daemon-reload
 sudo systemctl start homebridge
 sudo systemctl enable homebridge
 
