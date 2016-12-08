@@ -81,25 +81,25 @@ sudo bash -c 'cat > /var/homebridge/config.json' <<EOF
         {
                 "accessory": "GPIO",
                 "name": "Pin1",
-                "pin": $pin1
+                "pin": $pin1,
                 "inverted": "true"
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin2",
-                "pin": $pin2
+                "pin": $pin2,
                 "inverted": "true"
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin3",
-                "pin": $pin3
+                "pin": $pin3,
                 "inverted": "true"
         },
         {
                 "accessory": "GPIO",
                 "name": "Pin4",
-                "pin": $pin4
+                "pin": $pin4,
                 "inverted": "true"
         }
         ],
@@ -112,8 +112,6 @@ EOF
 HOMEBRIDGE_OPTS=-U /var/homebridge
 
 sudo bash -c 'cat > /etc/systemd/system/homebridge.service' <<EOF
-HOMEBRIDGE_OPTS=-U /var/homebridge
-
 [Unit]
 Description=homebridge_service
 After=basic.target
