@@ -109,6 +109,8 @@ sudo bash -c 'cat > /var/homebridge/config.json' <<EOF
 }
 EOF
 
+HOMEBRIDGE_OPTS=-U /var/homebridge
+
 sudo bash -c 'cat > /etc/systemd/system/homebridge.service' <<EOF
 HOMEBRIDGE_OPTS=-U /var/homebridge
 
