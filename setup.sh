@@ -18,8 +18,9 @@ node-gyp BUILDTYPE=Release rebuild'
 
 sudo npm install -g forever --unsafe-perm
 sudo npm install -g forever-service --unsafe-perm
-sudo npm install -g wiring-pi --unsafe-perm
-sudo npm install -g homebridge-gpio-wpi --unsafe-perm
+
+sudo bash -c 'cd /usr/local/lib/
+npm install -u homebridge-gpio-wpi'
 
 sudo mkdir /var/homebridge
 
