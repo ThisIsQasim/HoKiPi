@@ -16,10 +16,10 @@ npm install --unsafe-perm bignum
 cd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns
 node-gyp BUILDTYPE=Release rebuild'
 
-sudo npm install -g forever
-sudo npm install -g forever-service
-sudo npm install -u wiring-pi
-sudo npm install -u homebridge-gpio-wpi
+sudo npm install -g forever --unsafe-perm
+sudo npm install -g forever-service --unsafe-perm
+sudo npm install -g wiring-pi --unsafe-perm
+sudo npm install -g homebridge-gpio-wpi --unsafe-perm
 
 sudo mkdir /var/homebridge
 
