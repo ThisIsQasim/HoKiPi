@@ -4,9 +4,9 @@ sudo apt update
 
 sudo apt -y install wget vim make libavahi-compat-libdnssd-dev build-essential wiringPi
 
-wget https://nodejs.org/dist/v6.9.1/node-v6.9.1-linux-armv6l.tar.xz
+wget https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-armv6l.tar.xz
 
-tar -xvf node-v6.9.1-linux-armv6l.tar.xz
+tar -xvf node-v6.9.2-linux-armv6l.tar.xz
 
 sudo cp -R node-v6.9.1-linux-armv6l/* /usr/local/
 
