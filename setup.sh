@@ -20,7 +20,9 @@ sudo npm install -g forever --unsafe-perm
 sudo npm install -g forever-service --unsafe-perm
 
 sudo bash -c 'cd /usr/local/lib/
-npm install -u homebridge-gpio-wpi'
+npm install -g homebridge-gpio-wpi
+cd /usr/local/lib/node_modules/homebridge-gpio-wpi/
+npm -u install wiring-pi'
 
 sudo mkdir /var/homebridge
 
@@ -110,7 +112,7 @@ sudo bash -c 'cat > /var/homebridge/config.json' <<EOF
 }
 EOF
 
-HOMEBRIDGE_OPTS=-U /var/homebridge
+HOMEBRIDGE_OPTS="-U /var/homebridge"
 
 sudo bash -c 'cat > /etc/systemd/system/homebridge.service' <<EOF
 [Unit]
