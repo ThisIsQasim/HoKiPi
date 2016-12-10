@@ -22,7 +22,7 @@ sudo npm install -g --unsafe-perm forever-service
 sudo bash -c 'cd /usr/local/lib/
 npm install --unsafe-perm homebridge-gpio-wpi'
 
-sudo mkdir ~/.homebridge
+mkdir ~/.homebridge
 
 echo "Enter a name for your bridge:"
 read bridgename
@@ -69,7 +69,7 @@ else
     FOO=${pin4}
 fi
 
-sudo bash -c 'cat > ~/.homebridge/config.json' <<EOF
+cat > ~/.homebridge/config.json <<EOF
 {
     "bridge": {
         "name": "$bridgename",
@@ -119,7 +119,6 @@ After=syslog.target network-online.target
 [Service]
 Type=simple
 User=$USER
-EnvironmentFile=/etc/default/homebridge
 ExecStart=/usr/local/bin/homebridge
 Restart=on-failure
 RestartSec=10
@@ -129,7 +128,7 @@ KillMode=process
 WantedBy=multi-user.target
 EOF
 
-sudo bash -c 'cat > ~/.homebridge/boot.py' <<EOF
+cat > ~/.homebridge/boot.py <<EOF
 #!/usr/bin/env python
 
 import RPi.GPIO as GPIO
@@ -144,14 +143,14 @@ channel = [$pin1,$pin2,$pin3,$pin4]
 GPIO.setup(channel, GPIO.OUT, initial=GPIO.HIGH)
 EOF
 
-sudo chmod +x /var/homebridge/boot.py
+chmod +x ~/.homebridge/boot.py
 
-sudo sed -i -e '$i \python /var/homebridge/boot.py\n' /etc/rc.local
+sudo sed -i -e '$i \python /home/$USER/.homebridge/boot.py\n' /etc/rc.local
 
 ~/.homebridge/boot.py
 
 sudo systemctl daemon-reload
-sudo systemctl start homebridge
+sudo systemctl restart homebridge
 sudo systemctl enable homebridge
 
 echo "We are done here"
