@@ -16,15 +16,13 @@ npm install --unsafe-perm bignum
 cd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns
 node-gyp BUILDTYPE=Release rebuild'
 
-sudo npm install -g forever --unsafe-perm
-sudo npm install -g forever-service --unsafe-perm
+sudo npm install -g --unsafe-perm forever
+sudo npm install -g --unsafe-perm forever-service
 
 sudo bash -c 'cd /usr/local/lib/
-npm install -g homebridge-gpio-wpi
-cd /usr/local/lib/node_modules/homebridge-gpio-wpi/
-npm -u install wiring-pi'
+npm install --unsafe-perm homebridge-gpio-wpi'
 
-sudo mkdir /var/homebridge
+sudo mkdir ~/.homebridge
 
 echo "Enter a name for your bridge:"
 read bridgename
@@ -71,7 +69,7 @@ else
     FOO=${pin4}
 fi
 
-sudo bash -c 'cat > /var/homebridge/config.json' <<EOF
+sudo bash -c 'cat > ~/.homebridge/config.json' <<EOF
 {
     "bridge": {
         "name": "$bridgename",
@@ -112,24 +110,26 @@ sudo bash -c 'cat > /var/homebridge/config.json' <<EOF
 }
 EOF
 
-HOMEBRIDGE_OPTS="-U /var/homebridge"
 
 sudo bash -c 'cat > /etc/systemd/system/homebridge.service' <<EOF
 [Unit]
-Description=homebridge_service
-After=basic.target
+Description=Node.js HomeKit Server
+After=syslog.target network-online.target
+
 [Service]
 Type=simple
-User=root
-ExecStart=/usr/local/bin/homebridge $HOMEBRIDGE_OPTS
+User=$USER
+EnvironmentFile=/etc/default/homebridge
+ExecStart=/usr/local/bin/homebridge
 Restart=on-failure
 RestartSec=10
 KillMode=process
+
 [Install]
 WantedBy=multi-user.target
 EOF
 
-sudo bash -c 'cat > /var/homebridge/boot.py' <<EOF
+sudo bash -c 'cat > ~/.homebridge/boot.py' <<EOF
 #!/usr/bin/env python
 
 import RPi.GPIO as GPIO
@@ -148,6 +148,7 @@ sudo chmod +x /var/homebridge/boot.py
 
 sudo sed -i -e '$i \python /var/homebridge/boot.py\n' /etc/rc.local
 
+~/.homebridge/boot.py
 
 sudo systemctl daemon-reload
 sudo systemctl start homebridge
