@@ -16,6 +16,6 @@ Make sure you are connected to same network as your Pi. From your iOS device add
 
 ## Credits
 
-homebridge-gpio-wpi plugin: https://github.com/rsg98/homebridge-gpio-wpi
-homebridge: https://github.com/nfarina/homebridge
+homebridge-gpio-wpi plugin: https://github.com/rsg98/homebridge-gpio-wpi <br>
+homebridge: https://github.com/nfarina/homebridge <br>
 HAP-NodeJS: https://github.com/KhaosT/HAP-NodeJS
