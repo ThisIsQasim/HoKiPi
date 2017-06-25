@@ -2,7 +2,7 @@
 
 sudo apt update
 
-sudo apt -y install wget vim make libavahi-compat-libdnssd-dev build-essential wiringPi
+sudo apt -y install wget vim make avahi-daemon libavahi-compat-libdnssd-dev build-essential wiringPi
 
 wget https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-armv6l.tar.xz
 
@@ -14,12 +14,10 @@ sudo bash -c 'npm install -g --unsafe-perm homebridge hap-nodejs node-gyp
 cd /usr/local/lib/node_modules/homebridge/
 npm install --unsafe-perm bignum
 cd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns
-node-gyp BUILDTYPE=Release rebuild'
-
-sudo npm install -g --unsafe-perm forever
-sudo npm install -g --unsafe-perm forever-service
-
-sudo bash -c 'cd /usr/local/lib/
+node-gyp BUILDTYPE=Release rebuild
+npm install -g --unsafe-perm forever
+npm install -g --unsafe-perm forever-service
+cd /usr/local/lib/
 npm install --unsafe-perm homebridge-gpio-wpi'
 
 mkdir ~/.homebridge
